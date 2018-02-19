@@ -209,3 +209,9 @@
     @iOSFindBy(id = "check_button_id_in_your_ios_app")
     @WithTimeout(time = 1, unit = TimeUnit.SECONDS)
     public MobileElement CHECKBOX_BUTTON;
+
+## Start Appium and Emulator
+
+* ./node_modules/.bin/appium 
+* List emulators: /Users/{User}/Library/Android/sdk/tools/emulator -list-avds
+* Start emulator:  /Users/{User}/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_27_x86 -netdelay none -netspeed full

@@ -1,0 +1,22 @@
+ language: java
+
+jdk:
+  - oraclejdk8
+
+sudo: required
+
+install: true
+
+before_script: 
+  npm 
+  ./Users/jaffamonkey/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_27_x86 -netdelay none -netspeed full &
+
+script: mvn clean install
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push mihir83in/currencyconverter
+  - docker logout
+  - docker login -e="$HEROKU_EMAIL" -u="$HEROKU_USERNAME" -p="$HEROKU_PASSWORD" registry.heroku.com
+  - docker tag mihir83in/currencyconverter registry.heroku.com/currencyconv/web
+  - docker push registry.heroku.com/currencyconv/web
